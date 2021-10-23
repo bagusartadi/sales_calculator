@@ -9,7 +9,7 @@ class PilihElement extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sales Calculator', style: styleAppBar)),
+      appBar: AppBar(title: const Text('SET UP PAGE', style: styleAppBar)),
       bottomNavigationBar: const HakPaten(),
       body: Container(
         margin: const EdgeInsets.all(8.0),
@@ -23,7 +23,7 @@ class PilihElement extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const SetUpRoomTypeLayar()));
                 },
-                nama: 'Room Type Set-Up'),
+                nama: 'Room Type'),
             Tombol(
                 press: () {
                   Navigator.push(
@@ -31,8 +31,17 @@ class PilihElement extends StatelessWidget {
                       MaterialPageRoute(
                           builder: (context) => const SetUpOthersLayar()));
                 },
-                nama: 'FB & Others Set-Up',
+                nama: 'FB & Others',
                 warna: Colors.green[800]),
+            Tombol(
+                press: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SetUpGovernmentLayar()));
+                },
+                nama: 'Tax & Service',
+                warna: Colors.brown[800]),
           ],
         ),
       ),

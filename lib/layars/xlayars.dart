@@ -13,3 +13,5 @@ export 'm_effect_rate_agent.dart';
 export 'j_pack_plus_toagent.dart';
 export 'k_effect_rate_directtoagent.dart';
 export 'z_setup_others.dart';
+export 'za_setup_rmtype.dart';
+export 'zb_setup_government.dart';
