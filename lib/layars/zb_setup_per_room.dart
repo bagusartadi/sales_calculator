@@ -81,7 +81,7 @@ class _SetUpElementPerRoomState extends State<SetUpElementPerRoom> {
                       KotakIsian(
                           controller: _controllername,
                           label: 'Item',
-                          hint: "rest name - element",
+                          hint: "element name",
                           textInputType: TextInputType.text),
                       Row(
                         children: [

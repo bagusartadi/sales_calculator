@@ -57,6 +57,8 @@ class _SetUpGovernmentLayarState extends State<SetUpGovernmentLayar> {
                           style: const TextStyle(
                               fontSize: 25, color: Colors.white),
                           decoration: const InputDecoration(
+                              hintText: '00.0',
+                              hintStyle: TextStyle(color: Colors.grey),
                               border: UnderlineInputBorder()))),
                   const Text('%',
                       style: TextStyle(color: Colors.white, fontSize: 25)),
@@ -79,6 +81,8 @@ class _SetUpGovernmentLayarState extends State<SetUpGovernmentLayar> {
                           style: const TextStyle(
                               fontSize: 25, color: Colors.white),
                           decoration: const InputDecoration(
+                              hintText: '00.0',
+                              hintStyle: TextStyle(color: Colors.grey),
                               border: UnderlineInputBorder()))),
                   const Text('%',
                       style: TextStyle(color: Colors.white, fontSize: 25)),
