@@ -33,7 +33,7 @@ class _SetUpGovernmentLayarState extends State<SetUpGovernmentLayar> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Sales Calculator', style: styleAppBar)),
+      appBar: AppBar(title: const Text('Government', style: styleAppBar)),
       body: Form(
         key: _formKey,
         child: Container(

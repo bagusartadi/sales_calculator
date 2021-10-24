@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/layars/xlayars.dart';
-import 'package:sales_calculator/layars/za_setup_rmtype.dart';
+import 'package:sales_calculator/layars/z_setup_rmtype.dart';
 
 class PilihElement extends StatelessWidget {
   const PilihElement({Key? key}) : super(key: key);
@@ -29,10 +29,21 @@ class PilihElement extends StatelessWidget {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const SetUpOthersLayar()));
+                          builder: (context) => const SetUpElementPerPax()));
                 },
-                nama: 'FB & Others',
-                warna: Colors.green[800]),
+                nama: 'Package element\n per pax',
+                warna: Colors.brown[800],
+                height: 80.0),
+            Tombol(
+                press: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SetUpElementPerRoom()));
+                },
+                nama: 'Package element\n per room',
+                warna: Colors.brown[800],
+                height: 80.0),
             Tombol(
                 press: () {
                   Navigator.push(
@@ -41,7 +52,9 @@ class PilihElement extends StatelessWidget {
                           builder: (context) => const SetUpGovernmentLayar()));
                 },
                 nama: 'Tax & Service',
-                warna: Colors.brown[800]),
+                warna: Colors.blueGrey),
+            Tombol(
+                press: () {}, nama: 'Currency SetUp', warna: Colors.blueGrey),
           ],
         ),
       ),

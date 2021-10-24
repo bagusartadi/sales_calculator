@@ -5,6 +5,7 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/datas.dart';
+import 'package:sales_calculator/layars/d_pilih_channel.dart';
 import 'package:sales_calculator/moduls/xmoduls.dart';
 import 'package:sales_calculator/widgets/xwidgets.dart';
 
@@ -230,6 +231,15 @@ class _MobEffectRateDirToAgentState extends State<_MobEffectRateDirToAgent> {
                 )),
           ),
           SliverToBoxAdapter(child: Tombol(press: () {}, nama: 'Email')),
+          SliverToBoxAdapter(
+              child: Tombol(
+                  press: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const PilihChannel()));
+                  },
+                  nama: 'Home')),
         ],
       ),
     );

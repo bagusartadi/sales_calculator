@@ -13,9 +13,14 @@ final List<Government> pemerintah = [
   const Government(tax: 11.0, service: 10.0),
 ];
 
-final List<Item> items = [
+final List<Item> itemperpax = [
   const Item(itemName: "The Cafe-Breakfast", itemHarga: 200000),
   const Item(itemName: "The Cafe-Lunch", itemHarga: 280000),
+];
+
+final List<Item> itemperroom = [
+  const Item(itemName: "Transport", itemHarga: 250000),
+  const Item(itemName: "Resort Credit", itemHarga: 500000),
 ];
 
 final List<RoomType> roomtypes = [

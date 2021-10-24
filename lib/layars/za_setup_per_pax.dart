@@ -4,14 +4,14 @@ import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/datas.dart';
 import 'package:sales_calculator/moduls/xmoduls.dart';
 
-class SetUpOthersLayar extends StatefulWidget {
-  const SetUpOthersLayar({Key? key}) : super(key: key);
+class SetUpElementPerPax extends StatefulWidget {
+  const SetUpElementPerPax({Key? key}) : super(key: key);
 
   @override
-  _SetUpOthersLayarState createState() => _SetUpOthersLayarState();
+  _SetUpElementPerPaxState createState() => _SetUpElementPerPaxState();
 }
 
-class _SetUpOthersLayarState extends State<SetUpOthersLayar> {
+class _SetUpElementPerPaxState extends State<SetUpElementPerPax> {
   final TextEditingController _controllername = TextEditingController();
   final TextEditingController _controllerharga = TextEditingController();
   // List<Item> items = [];
@@ -50,7 +50,7 @@ class _SetUpOthersLayarState extends State<SetUpOthersLayar> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: const Text("Sales Calculator", style: styleAppBar),
+          title: const Text("Price per Pax", style: styleAppBar),
           actions: const [
             Padding(
               padding: EdgeInsets.all(8.0),
@@ -100,7 +100,7 @@ class _SetUpOthersLayarState extends State<SetUpOthersLayar> {
                                       primary: WarnaBerkah.warnaDasar),
                                   onPressed: () {
                                     if (_formKey.currentState!.validate()) {
-                                      items.add(Item(
+                                      itemperpax.add(Item(
                                           itemName: _controllername.text,
                                           itemHarga: int.tryParse(
                                               _controllerharga.text)));
@@ -131,10 +131,10 @@ class _SetUpOthersLayarState extends State<SetUpOthersLayar> {
                                       color: Colors.white, fontSize: 20.0)),
                               onSort: (int index, bool ascending) {
                                 if (ascending) {
-                                  items.sort((a, b) =>
+                                  itemperpax.sort((a, b) =>
                                       a.itemName!.compareTo(b.itemName!));
                                 } else {
-                                  items.sort((a, b) =>
+                                  itemperpax.sort((a, b) =>
                                       b.itemName!.compareTo(a.itemName!));
                                 }
                                 setState(() {
@@ -147,7 +147,7 @@ class _SetUpOthersLayarState extends State<SetUpOthersLayar> {
                                     style: TextStyle(
                                         color: Colors.white, fontSize: 20.0))),
                           ],
-                          rows: getDataRows(items),
+                          rows: getDataRows(itemperpax),
                         ),
                       ),
                       // buildDataTable(context),

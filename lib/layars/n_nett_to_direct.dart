@@ -5,18 +5,18 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/datas.dart';
-import 'package:sales_calculator/layars/n_nett_to_direct.dart';
+import 'package:sales_calculator/layars/o_effect_nett_to_direct.dart';
 import 'package:sales_calculator/moduls/xmoduls.dart';
 import 'package:sales_calculator/widgets/xwidgets.dart';
 
-class EffectiveRateAgent extends StatefulWidget {
-  const EffectiveRateAgent({Key? key}) : super(key: key);
+class AgentToDirect extends StatefulWidget {
+  const AgentToDirect({Key? key}) : super(key: key);
 
   @override
-  _EffectiveRateAgentState createState() => _EffectiveRateAgentState();
+  _AgentToDirectState createState() => _AgentToDirectState();
 }
 
-class _EffectiveRateAgentState extends State<EffectiveRateAgent> {
+class _AgentToDirectState extends State<AgentToDirect> {
   final TrackingScrollController? _trackingScrollController =
       TrackingScrollController();
 
@@ -33,31 +33,33 @@ class _EffectiveRateAgentState extends State<EffectiveRateAgent> {
       child: Scaffold(
         bottomNavigationBar: const HakPaten(),
         body: Responsive(
-          mobile:
-              _MobileEffectiveRateAgent(controller: _trackingScrollController!),
+          mobile: _MobileAgentToDirect(controller: _trackingScrollController!),
         ),
       ),
     );
   }
 }
 
-class _MobileEffectiveRateAgent extends StatefulWidget {
+class _MobileAgentToDirect extends StatefulWidget {
   final TrackingScrollController? controller;
-  const _MobileEffectiveRateAgent({Key? key, this.controller})
-      : super(key: key);
+  const _MobileAgentToDirect({Key? key, this.controller}) : super(key: key);
 
   @override
-  State<_MobileEffectiveRateAgent> createState() =>
-      _MobileEffectiveRateAgentState();
+  State<_MobileAgentToDirect> createState() => _MobileAgentToDirectState();
 }
 
-class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
+class _MobileAgentToDirectState extends State<_MobileAgentToDirect> {
   String? angkaPaidNight;
   String? angkaComNight;
+  String? angkaMarkUpPlus;
+  String? angkaMarkUpNet = '0.0';
+  bool isVisible = false;
+  bool isVisible2 = false;
+  bool isVisible3 = false;
 
   final RoomType? roomType;
 
-  _MobileEffectiveRateAgentState({this.roomType});
+  _MobileAgentToDirectState({this.roomType});
 
   @override
   Widget build(BuildContext context) {
@@ -68,16 +70,15 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
         slivers: [
           const SliverAppBar(
             pinned: true,
-            title: Text('Sales Calculator\n Agent ++',
+            title: Text('Sales Calculator',
                 style: styleAppBar, textAlign: TextAlign.center),
             actions: [
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
-                    // backgroundColor: Colors.white,
-                    backgroundImage:
-                        ExactAssetImage('images/currency_background.jpg'),
+                    backgroundColor: Colors.white,
                     maxRadius: 25,
+                    //nanti diganti DropDownButton [list currency]
                     child: Text('Rp',
                         style: TextStyle(
                             color: Colors.red,
@@ -85,6 +86,49 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                             fontWeight: FontWeight.bold))),
               )
             ],
+          ),
+          const SliverToBoxAdapter(
+              child: Text('Rate to Agent',
+                  style: TextStyle(fontSize: 25, color: Colors.lightBlue),
+                  textAlign: TextAlign.center)),
+          SliverToBoxAdapter(
+            child: MarkUp(
+              label1: 'EXClude\ntax&serv',
+              child1: DropdownButton(
+                dropdownColor: WarnaBerkah.warnaDasar2,
+                borderRadius: BorderRadius.circular(8.0),
+                style: const TextStyle(color: Colors.white, fontSize: 25.0),
+                items: markUpx
+                    .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                    .toList(),
+                value:
+                    angkaMarkUpPlus, //kalau include tax terisi otomatis ini null
+                onChanged: (value) {
+                  setState(() {
+                    angkaMarkUpPlus = value as String;
+                  });
+                },
+              ),
+              label2: 'INClude\ntax&serv',
+              child2: DropdownButton(
+                dropdownColor: WarnaBerkah.warnaDasar2,
+                borderRadius: BorderRadius.circular(8.0),
+                style: const TextStyle(color: Colors.white, fontSize: 25.0),
+                items: markUpx
+                    .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                    .toList(),
+                value: markUpx[0], //kalau Exclude tax terisi otomatis ini null
+                // onChanged: (value) {
+                //   setState(() {
+                //     angkaMarkUpNet = value as String;
+                //   });
+                // },
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Divider(
+                color: Colors.grey, thickness: 2.0, indent: 5, endIndent: 5),
           ),
           SliverToBoxAdapter(
             child: ListIsian(
@@ -121,7 +165,7 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
             ),
           ),
           const SliverToBoxAdapter(
-            child: DaftarHeader(label: 'Effective Rate'),
+            child: DaftarHeader(label: 'Selling Rate'),
           ),
           SliverList(
               delegate: SliverChildBuilderDelegate(
@@ -142,13 +186,24 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                       letterSpacing: 1.5),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    isVisible = !isVisible;
+                    setState(() {});
+                  },
                   icon: const Icon(
                     Icons.arrow_drop_down_circle_outlined,
                     size: 30.0,
                   ),
                 )),
           ),
+          SliverVisibility(
+              visible: isVisible,
+              maintainState: true,
+              sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          DaftarInclusion(inclusion: inclusionx[index]),
+                      childCount: inclusionx.length))),
           SliverToBoxAdapter(
             child: ListTile(
               title: const Text(
@@ -161,7 +216,10 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                     letterSpacing: 1.5),
               ),
               trailing: IconButton(
-                onPressed: () {},
+                onPressed: () {
+                  isVisible2 = !isVisible2;
+                  setState(() {});
+                },
                 icon: const Icon(
                   Icons.arrow_drop_down_circle_outlined,
                   size: 30.0,
@@ -169,6 +227,14 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
               ),
             ),
           ),
+          SliverVisibility(
+              visible: isVisible2,
+              maintainState: true,
+              sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          DaftarInclusion(inclusion: extraAdultx[index]),
+                      childCount: extraAdultx.length))),
           SliverToBoxAdapter(
             child: ListTile(
                 title: const Text(
@@ -181,23 +247,34 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                       letterSpacing: 1.5),
                 ),
                 trailing: IconButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    isVisible3 = !isVisible3;
+                    setState(() {});
+                  },
                   icon: const Icon(
                     Icons.arrow_drop_down_circle_outlined,
                     size: 30.0,
                   ),
                 )),
           ),
+          SliverVisibility(
+              visible: isVisible3,
+              maintainState: true,
+              sliver: SliverList(
+                  delegate: SliverChildBuilderDelegate(
+                      (context, index) =>
+                          DaftarInclusion(inclusion: extraChildx[index]),
+                      childCount: extraChildx.length))),
           SliverToBoxAdapter(
               child: Tombol(
                   press: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AgentToDirect()));
+                            builder: (context) =>
+                                const EffectRateAgentToDirect()));
                   },
-                  nama: 'Agent to Direct')),
-          SliverToBoxAdapter(child: Tombol(press: () {}, nama: 'Email')),
+                  nama: 'Effective rate')),
         ],
       ),
     );

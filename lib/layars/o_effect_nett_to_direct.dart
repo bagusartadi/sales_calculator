@@ -5,18 +5,19 @@ import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
 import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/datas.dart';
-import 'package:sales_calculator/layars/n_nett_to_direct.dart';
+import 'package:sales_calculator/layars/d_pilih_channel.dart';
 import 'package:sales_calculator/moduls/xmoduls.dart';
 import 'package:sales_calculator/widgets/xwidgets.dart';
 
-class EffectiveRateAgent extends StatefulWidget {
-  const EffectiveRateAgent({Key? key}) : super(key: key);
+class EffectRateAgentToDirect extends StatefulWidget {
+  const EffectRateAgentToDirect({Key? key}) : super(key: key);
 
   @override
-  _EffectiveRateAgentState createState() => _EffectiveRateAgentState();
+  _EffectRateAgentToDirectState createState() =>
+      _EffectRateAgentToDirectState();
 }
 
-class _EffectiveRateAgentState extends State<EffectiveRateAgent> {
+class _EffectRateAgentToDirectState extends State<EffectRateAgentToDirect> {
   final TrackingScrollController? _trackingScrollController =
       TrackingScrollController();
 
@@ -34,30 +35,31 @@ class _EffectiveRateAgentState extends State<EffectiveRateAgent> {
         bottomNavigationBar: const HakPaten(),
         body: Responsive(
           mobile:
-              _MobileEffectiveRateAgent(controller: _trackingScrollController!),
+              _MobEffectRateDirToAgent(controller: _trackingScrollController!),
         ),
       ),
     );
   }
 }
 
-class _MobileEffectiveRateAgent extends StatefulWidget {
+class _MobEffectRateDirToAgent extends StatefulWidget {
   final TrackingScrollController? controller;
-  const _MobileEffectiveRateAgent({Key? key, this.controller})
-      : super(key: key);
+  const _MobEffectRateDirToAgent({Key? key, this.controller}) : super(key: key);
 
   @override
-  State<_MobileEffectiveRateAgent> createState() =>
-      _MobileEffectiveRateAgentState();
+  State<_MobEffectRateDirToAgent> createState() =>
+      _MobEffectRateDirToAgentState();
 }
 
-class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
+class _MobEffectRateDirToAgentState extends State<_MobEffectRateDirToAgent> {
   String? angkaPaidNight;
   String? angkaComNight;
+  String? angkaMarkUpPlus;
+  String? angkaMarkUpNet = '0.0';
 
   final RoomType? roomType;
 
-  _MobileEffectiveRateAgentState({this.roomType});
+  _MobEffectRateDirToAgentState({this.roomType});
 
   @override
   Widget build(BuildContext context) {
@@ -68,15 +70,13 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
         slivers: [
           const SliverAppBar(
             pinned: true,
-            title: Text('Sales Calculator\n Agent ++',
+            title: Text('Sales Calculator',
                 style: styleAppBar, textAlign: TextAlign.center),
             actions: [
               Padding(
                 padding: EdgeInsets.all(8.0),
                 child: CircleAvatar(
-                    // backgroundColor: Colors.white,
-                    backgroundImage:
-                        ExactAssetImage('images/currency_background.jpg'),
+                    backgroundColor: Colors.white,
                     maxRadius: 25,
                     child: Text('Rp',
                         style: TextStyle(
@@ -85,6 +85,49 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                             fontWeight: FontWeight.bold))),
               )
             ],
+          ),
+          const SliverToBoxAdapter(
+              child: Text('Rate to Agent',
+                  style: TextStyle(fontSize: 25, color: Colors.lightBlue),
+                  textAlign: TextAlign.center)),
+          SliverToBoxAdapter(
+            child: MarkUp(
+              label1: 'EXClude\ntax&serv',
+              child1: DropdownButton(
+                dropdownColor: WarnaBerkah.warnaDasar2,
+                borderRadius: BorderRadius.circular(8.0),
+                style: const TextStyle(color: Colors.white, fontSize: 25.0),
+                items: markUpx
+                    .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                    .toList(),
+                value:
+                    angkaMarkUpPlus, //kalau include tax terisi otomatis ini null, angkanya ikuti page sblm nya
+                onChanged: (value) {
+                  setState(() {
+                    angkaMarkUpPlus = value as String;
+                  });
+                },
+              ),
+              label2: 'INClude\ntax&serv',
+              child2: DropdownButton(
+                dropdownColor: WarnaBerkah.warnaDasar2,
+                borderRadius: BorderRadius.circular(8.0),
+                style: const TextStyle(color: Colors.white, fontSize: 25.0),
+                items: markUpx
+                    .map((e) => DropdownMenuItem(child: Text(e), value: e))
+                    .toList(),
+                value: markUpx[0], //kalau Exclude tax terisi otomatis ini null
+                // onChanged: (value) {
+                //   setState(() {
+                //     angkaMarkUpNet = value as String;
+                //   });
+                // },
+              ),
+            ),
+          ),
+          const SliverToBoxAdapter(
+            child: Divider(
+                color: Colors.grey, thickness: 2.0, indent: 5, endIndent: 5),
           ),
           SliverToBoxAdapter(
             child: ListIsian(
@@ -188,16 +231,16 @@ class _MobileEffectiveRateAgentState extends State<_MobileEffectiveRateAgent> {
                   ),
                 )),
           ),
+          SliverToBoxAdapter(child: Tombol(press: () {}, nama: 'Email')),
           SliverToBoxAdapter(
               child: Tombol(
                   press: () {
                     Navigator.push(
                         context,
                         MaterialPageRoute(
-                            builder: (context) => const AgentToDirect()));
+                            builder: (context) => const PilihChannel()));
                   },
-                  nama: 'Agent to Direct')),
-          SliverToBoxAdapter(child: Tombol(press: () {}, nama: 'Email')),
+                  nama: 'Home')),
         ],
       ),
     );
