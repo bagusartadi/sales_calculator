@@ -55,6 +55,7 @@ class PilihElement extends StatelessWidget {
                 warna: Colors.blueGrey),
             Tombol(
                 press: () {}, nama: 'Currency SetUp', warna: Colors.blueGrey),
+            Tombol(press: () {}, nama: 'RESET ALL', warna: Colors.red),
           ],
         ),
       ),

@@ -32,7 +32,7 @@ class _SetUpElementPerRoomState extends State<SetUpElementPerRoom> {
     super.dispose();
   }
 
-  List<DataRow> getDataRows(List<Item> items) => itemperroom
+  List<DataRow> getDataRows(List<Item> itemperroom) => itemperroom
       .map((e) => DataRow(cells: [
             DataCell(Text(e.itemName!,
                 style: const TextStyle(color: Colors.white, fontSize: 20.0))),

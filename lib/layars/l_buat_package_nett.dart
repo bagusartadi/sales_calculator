@@ -149,26 +149,26 @@ class _MobileBuatPackNetState extends State<_MobileBuatPackNet> {
                   (context, index) =>
                       DaftarInclusion(inclusion: inclusionx[index]),
                   childCount: inclusionx.length)),
-          SliverToBoxAdapter(
-            child: ListTile(
-              title: const Text(
-                'Extra Adult (12years old and above)',
-                style: TextStyle(
-                    fontWeight: FontWeight.bold,
-                    fontStyle: FontStyle.italic,
-                    fontSize: 19.0,
-                    color: Colors.blueAccent,
-                    letterSpacing: 1.5),
-              ),
-              trailing: IconButton(
-                onPressed: () {},
-                icon: const Icon(
-                  Icons.arrow_drop_down_circle_outlined,
-                  size: 30.0,
-                ),
-              ),
-            ),
-          ),
+          // SliverToBoxAdapter(
+          //   child: ListTile(
+          //     title: const Text(
+          //       'Extra Adult (12years old and above)',
+          //       style: TextStyle(
+          //           fontWeight: FontWeight.bold,
+          //           fontStyle: FontStyle.italic,
+          //           fontSize: 19.0,
+          //           color: Colors.blueAccent,
+          //           letterSpacing: 1.5),
+          //     ),
+          //     trailing: IconButton(
+          //       onPressed: () {},
+          //       icon: const Icon(
+          //         Icons.arrow_drop_down_circle_outlined,
+          //         size: 30.0,
+          //       ),
+          //     ),
+          //   ),
+          // ),
           SliverToBoxAdapter(
             child: ListTile(
                 title: const Text(

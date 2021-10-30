@@ -160,39 +160,39 @@ class _MobileBuatPackPlusState extends State<_MobileBuatPackPlus> {
                         DaftarInclusion(inclusion: inclusionx[index]),
                     childCount: inclusionx.length)),
           ),
-          SliverToBoxAdapter(
-              child: ListTile(
-            title: const Text(
-              'Extra Adult (12years old and above)',
-              style: TextStyle(
-                  fontWeight: FontWeight.bold,
-                  fontStyle: FontStyle.italic,
-                  fontSize: 19.0,
-                  color: Colors.blueAccent,
-                  letterSpacing: 1.5),
-            ),
-            trailing: IconButton(
-              onPressed: () {
-                setState(() {
-                  isVisible2 = !isVisible2;
-                });
-              },
-              icon: const Icon(
-                Icons.arrow_drop_down_circle_outlined,
-                size: 30.0,
-              ),
-            ),
-          )),
-          SliverVisibility(
-            visible: isVisible2,
-            maintainState: true,
-            sliver: SliverList(
-                delegate: SliverChildBuilderDelegate(
-                    (context, index) => DaftarInclusion(
-                          inclusion: extraAdultx[index],
-                        ),
-                    childCount: extraAdultx.length)),
-          ),
+          // SliverToBoxAdapter(
+          //     child: ListTile(
+          //   title: const Text(
+          //     'Extra Adult (12years old and above)',
+          //     style: TextStyle(
+          //         fontWeight: FontWeight.bold,
+          //         fontStyle: FontStyle.italic,
+          //         fontSize: 19.0,
+          //         color: Colors.blueAccent,
+          //         letterSpacing: 1.5),
+          //   ),
+          //   trailing: IconButton(
+          //     onPressed: () {
+          //       setState(() {
+          //         isVisible2 = !isVisible2;
+          //       });
+          //     },
+          //     icon: const Icon(
+          //       Icons.arrow_drop_down_circle_outlined,
+          //       size: 30.0,
+          //     ),
+          //   ),
+          // )),
+          // SliverVisibility(
+          //   visible: isVisible2,
+          //   maintainState: true,
+          //   sliver: SliverList(
+          //       delegate: SliverChildBuilderDelegate(
+          //           (context, index) => DaftarInclusion(
+          //                 inclusion: extraAdultx[index],
+          //               ),
+          //           childCount: extraAdultx.length)),
+          // ),
           SliverToBoxAdapter(
             child: ListTile(
                 title: const Text(
