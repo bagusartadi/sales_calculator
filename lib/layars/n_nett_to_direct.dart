@@ -52,7 +52,7 @@ class _MobileAgentToDirectState extends State<_MobileAgentToDirect> {
   String? angkaPaidNight;
   String? angkaComNight;
   String? angkaMarkUpPlus;
-  String? angkaMarkUpNet = '0.0';
+  String? angkaMarkUpNet;
   bool isVisible = false;
   bool isVisible2 = false;
   bool isVisible3 = false;
