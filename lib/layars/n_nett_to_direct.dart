@@ -117,12 +117,13 @@ class _MobileAgentToDirectState extends State<_MobileAgentToDirect> {
                 items: markUpx
                     .map((e) => DropdownMenuItem(child: Text(e), value: e))
                     .toList(),
-                value: markUpx[0], //kalau Exclude tax terisi otomatis ini null
-                // onChanged: (value) {
-                //   setState(() {
-                //     angkaMarkUpNet = value as String;
-                //   });
-                // },
+                value:
+                    angkaMarkUpNet, //kalau Exclude tax terisi otomatis ini null
+                onChanged: (value) {
+                  setState(() {
+                    angkaMarkUpNet = value as String;
+                  });
+                },
               ),
             ),
           ),
