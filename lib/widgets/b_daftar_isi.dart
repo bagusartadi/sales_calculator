@@ -4,7 +4,7 @@ import 'package:flutter/services.dart';
 import 'package:sales_calculator/moduls/b_room_type.dart';
 
 class DaftarIsi extends StatelessWidget {
-  final TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController controller = TextEditingController();
   final RoomType? roomType;
   final String? hint;
   DaftarIsi({
@@ -43,7 +43,7 @@ class DaftarIsi extends StatelessWidget {
                   border: Border.all(color: Colors.white60),
                   borderRadius: BorderRadius.circular(5.0)),
               child: TextField(
-                controller: _textEditingController,
+                controller: controller,
                 style: const TextStyle(color: Colors.white, fontSize: 23.0),
                 keyboardType: TextInputType.number,
                 textAlign: TextAlign.center,

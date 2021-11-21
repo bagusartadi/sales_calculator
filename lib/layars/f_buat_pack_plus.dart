@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/painting.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter/widgets.dart';
+import 'package:intl/intl.dart';
 import 'package:packagesendiri/xpackagesendiri.dart';
 import 'package:sales_calculator/datas.dart';
 import 'package:sales_calculator/layars/h_effect_rate_direct.dart';
@@ -17,12 +18,12 @@ class BuatPackPlus extends StatefulWidget {
 }
 
 class _BuatPackPlusState extends State<BuatPackPlus> {
-  final TrackingScrollController? _trackingScrollController =
+  final TrackingScrollController _trackingScrollController =
       TrackingScrollController();
 
   @override
   void dispose() {
-    _trackingScrollController!.dispose();
+    _trackingScrollController.dispose();
     super.dispose();
   }
 
@@ -33,7 +34,7 @@ class _BuatPackPlusState extends State<BuatPackPlus> {
       child: Scaffold(
         bottomNavigationBar: const HakPaten(),
         body: Responsive(
-          mobile: _MobileBuatPackPlus(controller: _trackingScrollController!),
+          mobile: _MobileBuatPackPlus(controller: _trackingScrollController),
         ),
       ),
     );

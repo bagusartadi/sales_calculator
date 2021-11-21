@@ -77,11 +77,12 @@ class _DaftarPage2State extends State<DaftarPage2> {
                   child: const Text('Submit'),
                   onPressed: () {
                     final form = formKey.currentState!;
-                    if (form.validate()) {}
-                    Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                            builder: (context) => const LoginPage()));
+                    if (form.validate()) {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const LoginPage()));
+                    }
                   },
                 ),
               )

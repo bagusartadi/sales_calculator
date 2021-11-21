@@ -16,7 +16,6 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
   final TextEditingController controllerRmType = TextEditingController();
   final TextEditingController controllerBAR = TextEditingController();
   final TextEditingController controllerPax = TextEditingController();
-  final TextEditingController controllerJumlah = TextEditingController();
   final TextEditingController controllerSpcRate = TextEditingController();
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   bool sort = false;
@@ -30,8 +29,6 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
             //   setState(() {});
             // },
             cells: [
-              DataCell(Text(e.jumlah.toString(),
-                  style: const TextStyle(color: Colors.white, fontSize: 20.0))),
               DataCell(Text(e.pax.toString(),
                   style: const TextStyle(color: Colors.white, fontSize: 20.0))),
               DataCell(Text(e.tipeKamar!,
@@ -52,7 +49,6 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
     controllerRmType;
     controllerBAR;
     controllerPax;
-    controllerJumlah;
     controllerSpcRate;
     super.initState();
   }
@@ -62,7 +58,6 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
     controllerRmType.dispose();
     controllerBAR.dispose();
     controllerPax.dispose();
-    controllerJumlah.dispose();
     controllerSpcRate.dispose();
     super.dispose();
   }
@@ -100,19 +95,10 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
                       label: "Room Type",
                       textInputType: TextInputType.text,
                       controller: controllerRmType),
-                  Row(children: [
-                    Expanded(
-                        child: KotakIsian(
-                            label: "Pax",
-                            textInputType: TextInputType.number,
-                            controller: controllerPax)),
-                    const SizedBox(width: 2.5),
-                    Expanded(
-                        child: KotakIsian(
-                            label: "Jumlah",
-                            textInputType: TextInputType.number,
-                            controller: controllerJumlah)),
-                  ]),
+                  KotakIsian(
+                      label: "Pax",
+                      textInputType: TextInputType.number,
+                      controller: controllerPax),
                   KotakIsian(
                       label: "Best Available Rate",
                       textInputType: TextInputType.number,
@@ -123,14 +109,12 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
                           roomtypes.add(RoomType(
                               tipeKamar: controllerRmType.text,
                               bar: int.tryParse(controllerBAR.text),
-                              pax: int.tryParse(controllerPax.text),
-                              jumlah: int.tryParse(controllerJumlah.text)));
+                              pax: int.tryParse(controllerPax.text)));
                         }
                         setState(() {
                           controllerRmType.clear();
                           controllerBAR.clear();
                           controllerPax.clear();
-                          controllerJumlah.clear();
                         });
                       },
                       nama: "ENTER"),
@@ -142,11 +126,6 @@ class _SetUpRoomTypeLayarState extends State<SetUpRoomTypeLayar> {
                       columnSpacing: 1.0,
                       decoration: BoxDecoration(color: WarnaBerkah.warnaDasar2),
                       columns: [
-                        const DataColumn(
-                            label: Text(
-                          "Jum",
-                          style: TextStyle(color: Colors.white, fontSize: 20.0),
-                        )),
                         const DataColumn(
                             label: Text(
                           "Pax",
